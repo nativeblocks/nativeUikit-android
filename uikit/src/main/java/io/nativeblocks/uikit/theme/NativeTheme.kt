@@ -1,11 +1,12 @@
 package io.nativeblocks.uikit.theme
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
@@ -176,6 +177,36 @@ object NativeTheme {
         return color.copy(alpha = alpha)
     }
 
+    @Composable
+    fun sizeMapper(width: String?, height: String?): Modifier {
+        var resultModifier = Modifier.padding(0.dp)
+        resultModifier = if (height == "100%") {
+            resultModifier.then(Modifier.fillMaxHeight())
+        } else if (height.isNullOrEmpty()) {
+            resultModifier.then(Modifier.wrapContentHeight())
+        } else {
+            resultModifier.then(Modifier.height(height.toInt().dp))
+        }
+
+        resultModifier = if (width == "100%") {
+            resultModifier.then(Modifier.fillMaxWidth())
+        } else if (width.isNullOrEmpty()) {
+            resultModifier.then(Modifier.wrapContentWidth())
+        } else {
+            resultModifier.then(Modifier.width(width.toInt().dp))
+        }
+        return resultModifier
+    }
+
+    @Composable
+    fun spacingMapper(paddings: List<String>): PaddingValues {
+        return PaddingValues(
+            start = paddings[0].toInt().dp,
+            top = paddings[1].toInt().dp,
+            end = paddings[2].toInt().dp,
+            bottom = paddings[3].toInt().dp,
+        )
+    }
 }
 
 @Composable
