@@ -1,4 +1,4 @@
-package io.nativeblocks.uikit
+package io.nativeblocks.uikit.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
